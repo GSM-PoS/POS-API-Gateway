@@ -1,0 +1,49 @@
+{
+  "name": "pos-api-gateway",
+  "version": "1.0.0",
+  "description": "API Gateway for POS System with authentication, routing, and rate limiting",
+  "main": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun --hot src/server.ts",
+    "start": "bun src/server.ts",
+    "build": "bun build src/server.ts --target node --outdir dist",
+    "test": "bun test",
+    "lint": "bunx tsc --noEmit --skipLibCheck",
+    "pm2:start": "pm2 start ecosystem.config.cjs --env production",
+    "pm2:stop": "pm2 stop pos-api-gateway",
+    "pm2:restart": "pm2 restart pos-api-gateway",
+    "pm2:logs": "pm2 logs pos-api-gateway",
+    "pm2:delete": "pm2 delete pos-api-gateway",
+    "pm2:status": "pm2 status pos-api-gateway",
+    "pm2:monitor": "pm2 monit pos-api-gateway"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/express": "^5.0.5",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.18.1",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/compression": "^1.8.1",
+    "@types/cors": "^2.8.19",
+    "axios": "^1.7.7",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^8.0.0",
+    "http-proxy-middleware": "^3.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "pm2": "^6.0.13",
+    "rate-limit-redis": "^4.3.1",
+    "redis": "^4.7.0",
+    "ws": "^8.19.0"
+  }
+}
