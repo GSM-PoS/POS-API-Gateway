@@ -57,7 +57,8 @@ async function startServer() {
         const [k, ...v] = part.trim().split('=');
         if (k.trim() === 'accessToken') { token = v.join('='); break; }
       }
-      if (!token && typeof req.headers.authorization === 'string' && req.headers.authorization.startsWith('Bearer ')) {
+      if (!token) token = url.searchParams.get("token");
+      if (!token && typeof req.headers.authorization === "string" && req.headers.authorization.startsWith("Bearer ")) {
         token = req.headers.authorization.slice(7);
       }
 
