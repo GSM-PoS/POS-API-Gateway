@@ -120,9 +120,6 @@ export const createServiceProxy = (options: ProxyOptions) => {
           },
           on: {
             proxyReq: (proxyReq: ClientRequest, req: IncomingMessage) => {
-              // Remove browser Origin header — upstream services should not handle CORS
-              proxyReq.removeHeader("origin");
-              proxyReq.removeHeader("referer");
               const expressReq = req as ExpressRequest;
               const correlationReq = req as CorrelationRequest;
 
@@ -211,11 +208,6 @@ export const createServiceProxy = (options: ProxyOptions) => {
               });
             },
             proxyRes: (proxyRes: IncomingMessage, req: IncomingMessage) => {
-              // Strip upstream CORS headers so the gateway CORS middleware controls them
-              delete proxyRes.headers["access-control-allow-origin"];
-              delete proxyRes.headers["access-control-allow-credentials"];
-              delete proxyRes.headers["access-control-allow-methods"];
-              delete proxyRes.headers["access-control-allow-headers"];
               const expressReq = req as ExpressRequest;
               const correlationReq = req as CorrelationRequest;
               const duration = Date.now() - proxyStartTime;
